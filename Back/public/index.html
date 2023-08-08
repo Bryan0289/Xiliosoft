@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <title>Log</title>
+</head>
+
+<body>
+    <div id="g_id_onload" data-client_id="812237730275-pv2mkp8h3t1pij3ml3j8bmdrf2aotb66.apps.googleusercontent.com"
+        data-callback="onSignIn">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+</body>
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+
+</script>
+
+</html>
