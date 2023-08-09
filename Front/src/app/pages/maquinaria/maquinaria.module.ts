@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaquinariaComponent } from './maquinaria.component';
 
+import { MaquinariaRoutingModule } from './maquinaria-routing.module';
+import { FormMaquinariaComponent } from './view/form-maquinaria/form-maquinaria.component';
+import { TableMaquinariaComponent } from './view/table-maquinaria/table-maquinaria.component';
 
 
 @NgModule({
   declarations: [
-    MaquinariaComponent
+    FormMaquinariaComponent,
+    TableMaquinariaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaquinariaRoutingModule
   ]
 })
 export class MaquinariaModule { }
