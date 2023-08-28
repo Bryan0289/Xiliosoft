@@ -4,10 +4,14 @@ const Empleado = require('../models/empleado')
 const getEmpleado = async (req, res = response) => {
     try {
 
-        const empleados = await Empleado.findAll()
+        const empleados = await Empleado.findAll({
+            where: {
+                status: true
+              }
+        })
 
 
-        res.status(404).json({
+        res.status(200).json({
             ok: true,
             empleados
         })
@@ -20,19 +24,19 @@ const getEmpleado = async (req, res = response) => {
 }
 const postEmpleado = async (req, res = response) => {
     try {
-
+        console.log(req.body);
         const { nombre,cedula, cargoId, areaId } = req.body;
-
+        
         const nuevoEmpleado = await Empleado.create({
             nombre,
             cedula,
+            status:true,
             cargoId,
-            areaId,
-        });
-        nuevoEmpleado.save();
-        res.status(404).json({
+            areaId}
+        );
+        res.status(200).json({
             ok: true,
-            nuevoEmpleado: empleado
+            empleado: nuevoEmpleado
         })
     } catch (error) {
         res.status(404).json({
@@ -42,13 +46,15 @@ const postEmpleado = async (req, res = response) => {
     }
 }
 const putEmpleado = async (req=params, res = response) => {
+    console.log("entro");
     try {
         const {id}=req.params
-        const { nombre,cedula, cargoId, areaId } = req.body;
-        const empleadoActualizado = await Empleado.update(
+        const { nombre,cedula,status, cargoId, areaId } = req.body;
+        await Empleado.update(
             {
               nombre,
               cedula,
+              status,
               cargoId,
               areaId,
             },
@@ -57,9 +63,8 @@ const putEmpleado = async (req=params, res = response) => {
               returning: true
             }
           );
-        res.status(404).json({
-            ok: true,
-            empleadoActualizado: empleado
+        res.status(200).json({
+            ok: true
         })
     } catch (error) {
         res.status(404).json({
@@ -71,7 +76,7 @@ const putEmpleado = async (req=params, res = response) => {
 const deleteEmpleado = async (req=request, res = response) => {
     try {
         const { id } = req.params;
-        const empleadoEliminado = await Empleado.update(
+        await Empleado.update(
             {
               status:false
             },
@@ -80,9 +85,8 @@ const deleteEmpleado = async (req=request, res = response) => {
               returning: true
             }
           );
-        res.status(404).json({
-            ok: true,
-            empleadoEliminado: empleado
+        res.status(200).json({
+            ok: true
         })
     } catch (error) {
         res.status(404).json({

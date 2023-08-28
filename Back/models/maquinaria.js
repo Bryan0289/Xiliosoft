@@ -14,8 +14,8 @@ const Maquinaria = sequelize.define('Maquinaria', {
     },
     estado: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
+        defaultValue:false,
+    },
     status: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

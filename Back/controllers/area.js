@@ -7,7 +7,7 @@ const listArea = async(req, res = response) => {
         const areas = await Area.findAll();
 
 
-        res.status(404).json({
+        res.status(200).json({
             ok:true,
             areas
         })

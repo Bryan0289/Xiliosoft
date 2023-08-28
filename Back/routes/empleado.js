@@ -19,7 +19,7 @@ router.post('/', [
 
         check('nombre', 'El nombre es requerido').notEmpty(),
         check('cedula', 'La cedula es requerido').notEmpty(),
-        check('areaid', 'El area es requerido').notEmpty(),
+        check('areaId', 'El area es requerido').notEmpty(),
         check('cargoId', 'El cargo es requerido').notEmpty(),
         validar
 ], postEmpleado);
@@ -27,11 +27,12 @@ router.put('/:id', [
         // TODO:Validar la id en DB
         // TODO:Validar la cedula unica en DB
         // TODO: validar empleadoID, maquinariaId que existan en la DB
-
+        
         check('id', 'El id es requerido').notEmpty(),
         check('nombre', 'El nombre es requerido').notEmpty(),
         check('cedula', 'La cedula es requerido').notEmpty(),
-        check('areaid', 'El area es requerido').notEmpty(),
+        check('status', 'El estado es requerido').notEmpty(),
+        check('areaId', 'El area es requerido').notEmpty(),
         check('cargoId', 'El cargo es requerido').notEmpty(),
         validar
 ], putEmpleado);

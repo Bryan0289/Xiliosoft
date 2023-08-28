@@ -1,1 +1,63 @@
-<h1>Formulario de Empleado</h1>
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Empleado</h5>
+      <hr>
+      <form autocomplete="off" [formGroup]="empleadoForm" (ngSubmit)="guardar()">
+
+        <div class="row p-1">
+            <div class="col-4">Nombre</div>
+            <div class="col-8">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    formControlName="nombre">
+            </div>
+            <small *ngIf="validar('nombre')" class="error">
+                El Nombre es requerido
+            </small>
+        </div>
+        <div class="row p-1">
+            <div class="col-4">Cedula</div>
+            <div class="col-8">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    formControlName="cedula">
+            </div>
+            <small *ngIf="validar('cedula')" class="error">
+                La Cedula es requerida
+            </small>
+        </div>
+        <div class="row p-1">
+            <div class="col-4">Area</div>
+            <div class="col-8">
+                <select class="form-select" aria-label="Default select example" formControlName="area">
+                    <option value="0">Seleccione una Area</option>
+                    <option *ngFor="let area of areas" [value]="area.id">{{area.nombre}}</option>
+                </select>
+            </div>
+            <small *ngIf="validar('area')" class="error">
+                La Area es requerida
+            </small>
+        </div>
+        <div class="row p-1">
+            <div class="col-4">Cargo</div>
+            <div class="col-8">
+                <select class="form-select" aria-label="Default select example" formControlName="cargo">
+                    <option value="0">Seleccione una Cargo</option>
+                    <option *ngFor="let cargo of cargos" [value]="cargo.id">{{cargo.nombre}}</option>
+                </select>
+            </div>
+            <small *ngIf="validar('cargo')" class="error">
+                El Cargo es requerido
+            </small>
+        </div>
+        
+        
+        <div class="col-12 pt-4">
+
+            <button type="submit" class="btn btn-primary form-control">Crear</button>
+        </div>
+    </form>
+    </div>
+  </div>

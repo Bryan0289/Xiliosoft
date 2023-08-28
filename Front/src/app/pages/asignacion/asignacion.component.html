@@ -1,1 +1,40 @@
-<h1>Asignación</h1>
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Asignación</h5>
+      <hr>
+      <form autocomplete="off" [formGroup]="asignacionForm" (ngSubmit)="guardar()">
+
+        
+        <div class="row p-1">
+            <div class="col-4">Maquinaria</div>
+            <div class="col-8">
+                <select class="form-select" aria-label="Default select example" formControlName="maquinariaId">
+                    <option value="0">Seleccione una Maquinaria</option>
+                    <option *ngFor="let maquina of maquinaria" [value]="maquina.id">{{maquina.serie}}</option>
+                </select>
+            </div>
+            <small *ngIf="validar('maquinariaId')" class="error">
+                La Maquinaria es requerida
+            </small>
+        </div>
+        <div class="row p-1">
+            <div class="col-4">Empleado</div>
+            <div class="col-8">
+                <select class="form-select" aria-label="Default select example" formControlName="empleadoId">
+                    <option value="0">Seleccione un Empleado</option>
+                    <option *ngFor="let empleado of empleados" [value]="empleado.id">{{empleado.nombre}}</option>
+                </select>
+            </div>
+            <small *ngIf="validar('empleadoId')" class="error">
+                El Cargo es requerido
+            </small>
+        </div>
+        
+        
+        <div class="col-12 pt-4">
+
+            <button type="submit" class="btn btn-primary form-control">Crear</button>
+        </div>
+    </form>
+    </div>
+  </div>

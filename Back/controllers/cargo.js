@@ -7,7 +7,7 @@ const listCargos = async(req, res = response) => {
         const cargos = await Cargo.findAll();
 
 
-        res.status(404).json({
+        res.status(200).json({
             ok:true,
             cargos
         })

@@ -5,12 +5,16 @@ const Maquinaria = require('../models/maquinaria')
 const getMaquinaria = async (req, res = response) => {
     try {
 
-        const maquinaria = await Maquinaria.findAll()
+        const maquinarias = await Maquinaria.findAll({
+            where: {
+                status: true 
+            }
+        })
 
 
-        res.status(404).json({
+        res.status(200).json({
             ok: true,
-            maquinaria
+            maquinarias
         })
     } catch (error) {
         res.status(404).json({
@@ -19,6 +23,31 @@ const getMaquinaria = async (req, res = response) => {
         })
     }
 }
+
+const getMaquinariaDisponible = async (req, res = response) => {
+    try {
+
+        const maquinarias = await Maquinaria.findAll({
+            
+            where: {
+                status: true,
+                estado:false
+            }
+        })
+
+
+        res.status(200).json({
+            ok: true,
+            maquinarias
+        })
+    } catch (error) {
+        res.status(404).json({
+            ok: false,
+            msg: "Hable con el Admin"
+        })
+    }
+}
+
 
 const postMaquinaria = async (req, res = response) => {
     try {
@@ -26,13 +55,13 @@ const postMaquinaria = async (req, res = response) => {
         const { serie, descripcion } = req.body;
 
         const nuevaMaquinaria = await Maquinaria.create({
-            serie, 
+            serie,
+            status: true,
             descripcion
         });
-        nuevoEmpleado.save();
-        res.status(404).json({
+        res.status(200).json({
             ok: true,
-            nuevaMaquinaria: maquinaria
+            maquinaria: nuevaMaquinaria
         })
     } catch (error) {
         res.status(404).json({
@@ -42,25 +71,25 @@ const postMaquinaria = async (req, res = response) => {
     }
 }
 
-const putMaquinaria = async (req=request, res = response) => {
+const putMaquinaria = async (req = request, res = response) => {
     try {
-        const {id}=req.params;
+        const { id } = req.params;
         const { serie, descripcion, estado } = req.body;
 
         const maquinaActualizada = await Maquinaria.update(
             {
-              serie,
-              descripcion,
-              estado
+                serie,
+                descripcion,
+                status: true
             },
             {
-              where: { id },
-              returning: true
+                where: { id },
+                returning: true
             }
-          );
-        res.status(404).json({
+        );
+        res.status(200).json({
             ok: true,
-            maquinaActualizada: maquinaria
+            maquinaria: maquinaActualizada
         })
     } catch (error) {
         res.status(404).json({
@@ -70,22 +99,22 @@ const putMaquinaria = async (req=request, res = response) => {
     }
 }
 
-const deleteMaquinaria = async (req=request, res = response) => {
+const deleteMaquinaria = async (req = request, res = response) => {
     try {
-        const {id}=req.params;
+        const { id } = req.params;
 
-        const maquinaActualizada = await Maquinaria.update(
+        const maquinariaEliminada = await Maquinaria.update(
             {
-              status:false
+                status: false
             },
             {
-              where: { id },
-              returning: true
+                where: { id },
+                returning: true
             }
-          );
-        res.status(404).json({
+        );
+        res.status(200).json({
             ok: true,
-            maquinaActualizada: maquinaria
+            maquinaria: maquinariaEliminada
         })
     } catch (error) {
         res.status(404).json({
@@ -98,6 +127,7 @@ const deleteMaquinaria = async (req=request, res = response) => {
 
 module.exports = {
     getMaquinaria,
+    getMaquinariaDisponible,
     postMaquinaria,
     putMaquinaria,
     deleteMaquinaria

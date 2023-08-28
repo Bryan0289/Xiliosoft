@@ -1,3 +1,25 @@
 <h1>
     Resumen
 </h1>
+<hr>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Empleados</th>
+        <th scope="col">Maquinaria</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let asignacion of asignaciones">
+        <th scope="row">{{asignacion.id}}</th>
+        <td>{{asignacion.empleado.nombre}}</td>
+        <td>{{asignacion.maquinaria.serie}}</td>
+        <td *ngIf="asignacion.estado">
+          <button type="button" class="btn btn-primary" (click)="ejecutar(asignacion)">Debolución</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

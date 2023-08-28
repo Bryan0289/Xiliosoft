@@ -3,6 +3,7 @@ const { check } = require('express-validator')
 
 const { validar } = require('../middleware/validar')
 const { getMaquinaria,
+    getMaquinariaDisponible,
     postMaquinaria,
     putMaquinaria,
     deleteMaquinaria
@@ -13,6 +14,7 @@ const router = Router();
 
 
 router.get('/', getMaquinaria);
+router.get('/disponible', getMaquinariaDisponible);
 router.post('/', [
     //TODO:Validar serie unica
     check('serie', 'La serie es requerida').notEmpty(),
@@ -25,7 +27,6 @@ router.put('/:id', [
     check('id', 'El id es requerido').notEmpty(),
     check('serie', 'La serie es requerida').notEmpty(),
     check('descripcion', 'La descripcion es requerida').notEmpty(),
-    check('estado', 'El estado es requerido').notEmpty(),
     validar
 ], putMaquinaria);
 router.delete('/:id', [

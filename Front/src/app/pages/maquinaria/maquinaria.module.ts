@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MaquinariaRoutingModule } from './maquinaria-routing.module';
 import { FormMaquinariaComponent } from './view/form-maquinaria/form-maquinaria.component';
 import { TableMaquinariaComponent } from './view/table-maquinaria/table-maquinaria.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,6 +14,8 @@ import { TableMaquinariaComponent } from './view/table-maquinaria/table-maquinar
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MaquinariaRoutingModule
   ]
 })

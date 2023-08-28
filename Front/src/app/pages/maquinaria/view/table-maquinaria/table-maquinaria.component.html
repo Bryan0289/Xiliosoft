@@ -1,1 +1,28 @@
 <h1>Maquinaria</h1>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Serie</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let m of maquinarias; let i=index">
+            <th scope="row">{{m.id}}</th>
+            <td>
+                <input type="text" class="form-control" placeholder="Serie" [(ngModel)]="m.serie">
+            </td>
+            <td>
+                <input type="text" class="form-control" placeholder="Descripcion" [(ngModel)]="m.descripcion">
+            </td>
+            <td>
+                <Button class="btn btn-primary" (click)="guardar(m)">Editar</Button>
+                <Button class="btn btn-danger" (click)="eliminar(m)">Eliminar</Button>
+            </td>
+        </tr>
+        <tr>
+    </tbody>
+</table>
